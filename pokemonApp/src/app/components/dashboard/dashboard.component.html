@@ -1,3 +1,11 @@
 <div class="dashboard">
-    <router-outlet></router-outlet>
+    <h2 class="title">{{title}}</h2>
+    <metrics 
+            [metrics]="metrics"
+            [analyticsData]="analyticsData"
+     ></metrics>
+    <chart 
+            [analyticsData]="analyticsData"
+            [height]="500"
+    ></chart>
 </div>

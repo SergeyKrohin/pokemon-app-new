@@ -1,0 +1,25 @@
+:host {
+    &:first-child {
+        .metric-block {
+             margin-left: 20px;   
+        }
+    }
+    .metric-block {
+        display: inline-block;
+        border: 1px solid #000;
+        border-radius: 10px;
+        margin: 20px 20px 20px 0;
+        padding: 10px;
+        text-align: center;
+        width: 160px;
+        .metric-icon {
+            width: 85px;
+        }
+        .metric-value {
+            font-size: 35px;
+        }
+        .metric-name {
+            font-size: 16px;
+        }
+    }  
+}

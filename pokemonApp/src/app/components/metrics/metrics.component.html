@@ -1,0 +1,8 @@
+<div class="metrics">
+    <select (change)="onMetricOptionChange($event)" class="metric-options">
+       <option *ngFor="let opt of metricOptions" [value]="opt">{{opt}}</option>
+    </select>
+    <div *ngIf="analyticsData.length" class="metric-blocks-list">
+        <metric-block *ngFor="let metric of metrics" [name]="metric" [value]="metricValues[currentMetricOption][metric]" ></metric-block>
+    </div>
+</div>

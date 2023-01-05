@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { EvolutionChainComponent } from './components/evolution-chain/evolution-chain.component';
-import { EvolutionChainWrapperComponent } from './components/evolution-chain-wrapper/evolution-chain-wrapper.component';
-import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
-import { Loader } from './components/shared/loader.component';
-import { PokemonDataService } from './services/pokemon-data/pokemon-data.service'
+import { MetricsComponent } from './components/metrics/metrics.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { MetricBlock } from './components/metrics/metric-block/metric-block.component';
+import { UtilsService } from './services/utils/utils.service';
+import { DataService } from './services/data/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http/http.service';
-import { EvolutionChainResolver } from './services/evolution-chain-resolver/evolution-chain-resolver.service';
-import { FilterPipe } from './pipes/filter.pipe';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -20,21 +16,19 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     DashboardComponent,
-    PokemonListComponent,
-    EvolutionChainComponent,
-    EvolutionChainWrapperComponent,
-    FilterPipe
+    ChartComponent,
+    MetricsComponent,
+    MetricBlock
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     FormsModule
   ],
   providers: [
-    PokemonDataService,
     HttpService,
-    EvolutionChainResolver
+    DataService,
+    UtilsService
   ],
   bootstrap: [AppComponent]
 })
