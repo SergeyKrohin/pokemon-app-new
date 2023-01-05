@@ -1,12 +1,13 @@
 :host {
     &:first-child {
         .metric-block {
-             margin-left: 20px;   
+             margin-left: 20px;
         }
     }
     .metric-block {
         display: inline-block;
-        border: 1px solid #000;
+        background-color: #fff;
+        box-shadow: rgb(0 0 0 / 24%) 0 3px 8px;
         border-radius: 10px;
         margin: 20px 20px 20px 0;
         padding: 10px;
@@ -21,5 +22,5 @@
         .metric-name {
             font-size: 16px;
         }
-    }  
+    }
 }

@@ -10,11 +10,11 @@ import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 export class ChartComponent implements OnChanges {
 
     constructor() {}
-    
+
     @Input() analyticsData: any;
     @Input() height: any;
 
-    
+
     private transformData(data: any): any {
       const transformedData = [];
       const keys = Object.keys(data[0]);
@@ -24,12 +24,11 @@ export class ChartComponent implements OnChanges {
       }
       return transformedData;
     }
-    
+
   ngOnChanges(changes: SimpleChanges) {
     if (!changes['analyticsData'].firstChange) {
-        const _columns = this.transformData(this.analyticsData);
 
-        const chart = c3.generate({
+        c3.generate({
             size: {
                 height: this.height
             },
@@ -39,9 +38,10 @@ export class ChartComponent implements OnChanges {
             data: {
                 x: 'timestamp',
                 xFormat: '%Y-%m-%d %H:%M:%S', // how the date is parsed
-                columns: _columns,
+                columns: this.transformData(this.analyticsData),
                 colors: {
-                    conversions: '#70da79'
+                    conversions: '#70da79',
+                  
                 }
             },
             axis: {
