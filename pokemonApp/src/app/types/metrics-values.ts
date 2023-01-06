@@ -1,4 +1,4 @@
-export type IMetricsValues = {
+export type MetricsValues = {
   [key: string]: {
     impressions: number,
     clicks: number,

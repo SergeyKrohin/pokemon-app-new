@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 
 export class MetricBlock {
 
-    @Input() name: any = '';
+    @Input() name: string = '';
     @Input() value: any = 0;
-    
+
 }

@@ -1,6 +1,6 @@
 import * as c3 from 'c3';
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
-import {IMetricsValues} from "../../interfaces/metrics-values.interface";
+import {MetricsValues} from "../../types/metrics-values";
 
 @Component({
     selector: 'chart',
@@ -12,11 +12,11 @@ export class ChartComponent implements OnChanges {
 
     constructor() {}
 
-    @Input() analyticsData: Array<IMetricsValues> = [];
+    @Input() analyticsData: Array<MetricsValues> = [];
     @Input() height: number = 0;
 
 
-    private transformData(data: Array<IMetricsValues>): any {
+    private transformData(data: Array<MetricsValues>): any {
       const transformedData = [];
       const keys = Object.keys(data[0]);
       for (const key of keys) {

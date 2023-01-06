@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { UtilsService } from '../../services/utils/utils.service';
-import {IMetricsValues} from "../../interfaces/metrics-values.interface";
+import {MetricsValues} from "../../types/metrics-values";
 
 @Component({
     selector: 'metrics',
@@ -12,14 +12,14 @@ export class MetricsComponent implements OnChanges {
 
     constructor(private utilsService: UtilsService) {}
 
-    @Input() analyticsData: Array<IMetricsValues> = [];
+    @Input() analyticsData: Array<MetricsValues> = [];
     @Input() metrics: Array<string> = [];
 
     public metricOptions:Array<string> = ['sum', 'average'];
     public currentMetricOption: string = this.metricOptions[0];
     private memoizedCalculateTotals: any;
     private memoizedCalculateAverages: any;
-    public metricsValues: IMetricsValues = {};
+    public metricsValues: MetricsValues = {};
 
     private setMetricValues() {
         // memoized methods will return cached values and won't calculate the result on every select change

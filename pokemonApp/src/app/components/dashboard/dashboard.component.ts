@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../services/data/data.service';
-import {IMetricsValues} from "../../interfaces/metrics-values.interface";
+import {WebsiteMetrics} from "../../types/website-metrics";
+import {MetricsValues} from "../../types/metrics-values";
 
 @Component({
     selector: 'dashboard',
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
     constructor(private dataService: DataService) {}
 
     public chartHeight: number = 400;
-    public analyticsData:Array<IMetricsValues> = [];
+    public analyticsData:Array<MetricsValues> = [];
     public title: string = '';
     public metrics:Array<string> = [
         'impressions',
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit {
 
 
     ngOnInit() {
-        this.dataService.getJSON().subscribe((res: any) => {
+        this.dataService.getJSON().subscribe((res: WebsiteMetrics) => {
             this.analyticsData = res.data;
             this.title = res.title;
         });
