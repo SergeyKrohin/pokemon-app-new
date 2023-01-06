@@ -8,8 +8,6 @@ import { MetricBlock } from './components/metrics/metric-block/metric-block.comp
 import { UtilsService } from './services/utils/utils.service';
 import { DataService } from './services/data/data.service';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpService } from './services/http/http.service';
-import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -26,7 +24,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    HttpService,
     DataService,
     UtilsService
   ],

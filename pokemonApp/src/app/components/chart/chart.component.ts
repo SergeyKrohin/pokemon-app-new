@@ -1,5 +1,6 @@
 import * as c3 from 'c3';
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import {IMetricsValues} from "../../interfaces/metrics-values.interface";
 
 @Component({
     selector: 'chart',
@@ -11,11 +12,11 @@ export class ChartComponent implements OnChanges {
 
     constructor() {}
 
-    @Input() analyticsData: any;
-    @Input() height: any;
+    @Input() analyticsData: Array<IMetricsValues> = [];
+    @Input() height: number = 0;
 
 
-    private transformData(data: any): any {
+    private transformData(data: Array<IMetricsValues>): any {
       const transformedData = [];
       const keys = Object.keys(data[0]);
       for (const key of keys) {
@@ -41,7 +42,7 @@ export class ChartComponent implements OnChanges {
                 columns: this.transformData(this.analyticsData),
                 colors: {
                     conversions: '#70da79',
-                  
+
                 }
             },
             axis: {
