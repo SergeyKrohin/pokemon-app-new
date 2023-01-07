@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../services/data/data.service';
 import {WebsiteMetrics} from "../../types/website-metrics";
 import {MetricsValues} from "../../types/metrics-values";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'dashboard',
@@ -18,9 +19,14 @@ export class DashboardComponent implements OnInit {
     public title: string = '';
 
     ngOnInit() {
-        this.dataService.getJSON().subscribe((res: WebsiteMetrics) => {
+        this.dataService.getJSON().subscribe({
+          next: (res: WebsiteMetrics) => {
             this.analyticsData = res.data;
             this.title = res.title;
+          },
+          error: (err: HttpErrorResponse) => {
+            console.log(err);
+          }
         });
 
     }
