@@ -9,6 +9,7 @@ import { UtilsService } from './services/utils/utils.service';
 import { DataService } from './services/data/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import {MetricsService} from "./services/metrics/metrics.service";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [
     DataService,
-    UtilsService
+    UtilsService,
+    MetricsService
   ],
   bootstrap: [AppComponent]
 })

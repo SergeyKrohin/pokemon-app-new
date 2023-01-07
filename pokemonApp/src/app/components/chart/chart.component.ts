@@ -16,20 +16,21 @@ export class ChartComponent implements OnChanges {
     @Input() height: number = 0;
 
 
-    private transformData(data: Array<MetricsValues>): any {
-      const transformedData = [];
-      const keys = Object.keys(data[0]);
-      for (const key of keys) {
-        const values = data.map((item: any) => item[key]);
-        transformedData.push([key, ...values]);
-      }
-      return transformedData;
+  private transformData(data: Array<MetricsValues>): Array<[string, ...number[]]> {
+    // structure data for c3 chart columns
+    const transformedData: Array<[string, ...number[]]> = [];
+    const keys = Object.keys(data[0]);
+    for (const key of keys) {
+      const values = data.map((item: any) => item[key]);
+      transformedData.push([key, ...values]);
     }
+    return transformedData;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes['analyticsData'].firstChange) {
 
-        const chart = c3.generate({
+        c3.generate({
             size: {
                 height: this.height
             },

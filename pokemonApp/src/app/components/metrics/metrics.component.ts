@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { UtilsService } from '../../services/utils/utils.service';
 import {MetricsValues} from "../../types/metrics-values";
 import {MetricBlock} from "../../types/metric-block";
+import {MetricsService} from "../../services/metrics/metrics.service";
 
 @Component({
     selector: 'metrics',
@@ -11,13 +12,13 @@ import {MetricBlock} from "../../types/metric-block";
 
 export class MetricsComponent implements OnChanges {
 
-    constructor(private utilsService: UtilsService) {}
+    constructor(private utilsService: UtilsService, private metricsService: MetricsService) {}
 
     @Input() analyticsData: Array<MetricsValues> = [];
-    @Input() metrics: Array<MetricBlock> = [];
 
     public metricOptions:Array<string> = ['sum', 'average'];
     public currentMetricOption: string = this.metricOptions[0];
+    public metrics: Array<MetricBlock> = [];
     private memoizedCalculateTotals: any;
     private memoizedCalculateAverages: any;
     public metricsValues: MetricsValues = {};
@@ -67,11 +68,10 @@ export class MetricsComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (!changes['analyticsData'].firstChange) {
-            console.log('metrics: ', this.metrics);
-            console.log('metrics values: ', this.metricsValues);
             // use memoized methods to calculate values only when their properties are changed
             this.memoizedCalculateTotals = this.utilsService.memoize(this.calculateTotals);
             this.memoizedCalculateAverages = this.utilsService.memoize(this.calculateAverages);
+            this.metrics = this.metricsService.getMetrics();
             this.setMetricValues();
         }
     }
