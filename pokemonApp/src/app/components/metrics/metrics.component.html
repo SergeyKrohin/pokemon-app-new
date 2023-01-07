@@ -4,6 +4,11 @@
        <option *ngFor="let opt of metricOptions" [value]="opt">{{opt}}</option>
     </select>
     <div *ngIf="analyticsData.length" class="metric-blocks-list">
-        <metric-block *ngFor="let metric of metrics" [name]="metric" [value]="metricsValues[metric]" ></metric-block>
+        <metric-block
+          *ngFor="let metric of metrics"
+          [name]="metric.name"
+          [text]="metric.text"
+          [value]="metricsValues[metric.name]" >
+        </metric-block>
     </div>
 </div>

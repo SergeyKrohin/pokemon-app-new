@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { UtilsService } from '../../services/utils/utils.service';
 import {MetricsValues} from "../../types/metrics-values";
+import {MetricBlock} from "../../types/metric-block";
 
 @Component({
     selector: 'metrics',
@@ -13,7 +14,7 @@ export class MetricsComponent implements OnChanges {
     constructor(private utilsService: UtilsService) {}
 
     @Input() analyticsData: Array<MetricsValues> = [];
-    @Input() metrics: Array<string> = [];
+    @Input() metrics: Array<MetricBlock> = [];
 
     public metricOptions:Array<string> = ['sum', 'average'];
     public currentMetricOption: string = this.metricOptions[0];
@@ -39,14 +40,14 @@ export class MetricsComponent implements OnChanges {
         this.setMetricValues();
     }
 
-    private calculateTotals(data: Array<{ [key: string]: number }>, metrics: string[]) {
+    private calculateTotals(data: Array<{ [key: string]: number }>, metrics: Array<MetricBlock>) {
       // Create an empty object to store the sums
       const sums: { [key: string]: number } = {};
 
       // Iterate over the metrics
       for (const metric of metrics) {
         // Use the reduce method to sum the values of the metric
-        sums[metric] = data.reduce((sum: number, entry: { [key: string]: number }) => sum + entry[metric], 0);
+        sums[metric.name] = data.reduce((sum: number, entry: { [key: string]: number }) => sum + entry[metric.name], 0);
       }
 
       return sums;
@@ -66,6 +67,8 @@ export class MetricsComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (!changes['analyticsData'].firstChange) {
+            console.log('metrics: ', this.metrics);
+            console.log('metrics values: ', this.metricsValues);
             // use memoized methods to calculate values only when their properties are changed
             this.memoizedCalculateTotals = this.utilsService.memoize(this.calculateTotals);
             this.memoizedCalculateAverages = this.utilsService.memoize(this.calculateAverages);

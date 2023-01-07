@@ -29,7 +29,7 @@ export class ChartComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (!changes['analyticsData'].firstChange) {
 
-        c3.generate({
+        const chart = c3.generate({
             size: {
                 height: this.height
             },
