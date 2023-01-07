@@ -1,3 +1,5 @@
+@import "../../../../styles/variables";
+
 :host {
     &:first-child {
         .metric-block {
@@ -17,9 +19,11 @@
         }
         .metric-value {
             font-size: 35px;
+            color: $lightblue;
         }
         .metric-name {
             font-size: 16px;
+            text-transform: capitalize;
         }
         .front, .back {
           display: inline-block;

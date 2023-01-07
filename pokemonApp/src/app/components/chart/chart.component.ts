@@ -20,8 +20,10 @@ export class ChartComponent implements OnChanges {
     // structure data for c3 chart columns
     const transformedData: Array<[string, ...number[]]> = [];
     const keys = Object.keys(data[0]);
+    // loop over metric names
     for (const key of keys) {
-      const values = data.map((item: any) => item[key]);
+      const values = data.map((item: MetricsValues) => (item[key] as unknown) as number);
+      // add metric name as a first item of each column
       transformedData.push([key, ...values]);
     }
     return transformedData;
@@ -42,7 +44,8 @@ export class ChartComponent implements OnChanges {
                 xFormat: '%Y-%m-%d %H:%M:%S', // how the date is parsed
                 columns: this.transformData(this.analyticsData),
                 colors: {
-                    conversions: '#70da79',
+                    impressions: '#60beca',
+                    conversions: '#70da79'
 
                 }
             },
